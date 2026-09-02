@@ -62,6 +62,7 @@ type RailItem = {
 const LEFT_RAIL: RailItem[] = [
   { id: "shop", label: "Shop", icon: ShoppingCart, target: { kind: "modal", modal: "shop" }, badge: "!", tint: "crimson" },
   { id: "missions", label: "Missions", icon: ClipboardList, target: { kind: "modal", modal: "missions" }, badge: "!", tint: "leaf" },
+  { id: "classes", label: "Classes", icon: User, target: { kind: "tab", tab: "classes" }, tint: "violet" },
 ];
 
 const RIGHT_RAIL: RailItem[] = [
@@ -70,7 +71,6 @@ const RIGHT_RAIL: RailItem[] = [
 ];
 
 const TABS: { id: string; label: string; icon: typeof User; target: ArtTarget; tint: Tint }[] = [
-  { id: "classes", label: "Classes", icon: User, target: { kind: "tab", tab: "classes" }, tint: "violet" },
   { id: "weapons", label: "Weapons", icon: Swords, target: { kind: "tab", tab: "weapons" }, tint: "crimson" },
 ];
 
