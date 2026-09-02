@@ -881,7 +881,7 @@ export function MenuPanel({
                           </span>
                         </div>
                         <p className="text-[9px] font-bold uppercase tracking-wide text-white/65">
-                          {WEAPONS[def.weapon].name}
+                          {WEAPONS[def.weapon]?.name ?? def.weapon}
                         </p>
                         <div className="flex flex-wrap justify-center gap-1">
                           {def.buffs.slice(0, 3).map((b) => (

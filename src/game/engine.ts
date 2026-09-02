@@ -1284,7 +1284,7 @@ export function createState(
       aim: a,
       cd: 0,
       muzzle: 0,
-      weapon: def.turretWeapon,
+      weapon: WEAPONS[def.turretWeapon] ? def.turretWeapon : "pistol",
       kind: "turret",
     });
   }
@@ -1306,7 +1306,7 @@ export function createState(
       bob: 0,
       moving: false,
       animT: 0,
-      weapon: def.weapon,
+      weapon: WEAPONS[def.weapon] ? def.weapon : "pistol",
       shield: 0,
       damageMult: def.damage * def.damageMult,
       rateMult: 1,
@@ -1335,7 +1335,7 @@ export function createState(
     waveTimer: WAVE_LENGTH,
     spawnTimer: 0.2,
     phase: "wave",
-    arsenal: [def.weapon],
+    arsenal: [WEAPONS[def.weapon] ? def.weapon : "pistol"],
     class: cls,
     shopOffers: [],
     shopRerolls: 0,
