@@ -1256,9 +1256,38 @@ function ruggedPath(ctx: CanvasRenderingContext2D) {
 
 /* ------------------------------- state factory ------------------------------ */
 
-export function createState(character: CharacterKey = "spike", mode: RunMode = "survival"): GameState {
-  const c = CHARACTERS[character];
+export function createState(
+  character: CharacterKey = "spike",
+  mode: RunMode = "survival",
+  cls: ClassKey = classForSkin(character),
+): GameState {
+  const def = CLASSES[cls] ?? CLASSES.soldier;
+  const skin = def.skin ?? character;
+  const c = CHARACTERS[skin];
   const decor: Decor[] = [];
+
+  const maxHp = Math.round(def.hp * def.hpMult);
+  const speed = Math.round(def.speed * def.speedMult);
+  const mods = baseMods();
+  mods.crit += def.crit;
+  mods.lifesteal += def.lifesteal;
+
+  const startTurrets: Turret[] = [];
+  for (let i = 0; i < def.turrets; i++) {
+    const a = (i / Math.max(1, def.turrets)) * Math.PI * 2;
+    startTurrets.push({
+      x: Math.cos(a) * 90,
+      y: Math.sin(a) * 90,
+      hp: 60,
+      maxHp: 60,
+      life: Number.POSITIVE_INFINITY,
+      aim: a,
+      cd: 0,
+      muzzle: 0,
+      weapon: def.turretWeapon,
+      kind: "turret",
+    });
+  }
 
   const state: GameState = {
     cam: { x: -WORLD_W / 2, y: -WORLD_H / 2 },
@@ -1267,26 +1296,27 @@ export function createState(character: CharacterKey = "spike", mode: RunMode = "
       x: 0,
       y: 0,
       radius: 22,
-      speed: c.speed,
-      baseSpeed: c.speed,
-      hp: c.hp,
-      maxHp: c.hp,
+      speed,
+      baseSpeed: speed,
+      hp: maxHp,
+      maxHp,
       facing: 1,
       aim: 0,
       invuln: 0,
       bob: 0,
       moving: false,
       animT: 0,
-      weapon: c.weapon,
+      weapon: def.weapon,
       shield: 0,
-      damageMult: c.damage,
+      damageMult: def.damage * def.damageMult,
       rateMult: 1,
-      character,
-      mods: baseMods(),
+      character: skin,
+      class: cls,
+      mods,
     },
     enemies: [],
     bullets: [],
-    turrets: [],
+    turrets: startTurrets,
     ebullets: [],
     hazards: [],
     invertT: 0,
