@@ -27,6 +27,7 @@ import { CHARACTERS, WEAPONS } from "@/game/engine";
 import { RARITY_COLOR, UPGRADES } from "@/game/upgrades";
 import { isNewDay, levelFor, useProfile, XP_PER_LEVEL, xpInLevel } from "@/game/profile";
 import type { CharacterKey } from "@/game/types";
+import { CLASSES, CLASS_KEYS, type ClassKey } from "@/game/classes";
 
 const IDLE_FRAMES = 6;
 
@@ -49,6 +50,7 @@ export type PanelKey =
   | "settings"
   | "profile"
   | "character"
+  | "classes"
   | "weapons"
   | "upgrades"
   | "echoes";
@@ -63,6 +65,7 @@ const TITLES: Record<PanelKey, string> = {
   settings: "Settings",
   profile: "Profile",
   character: "Heroes",
+  classes: "Classes",
   weapons: "Weapons",
   upgrades: "Perks",
   echoes: "Echoes",
@@ -264,6 +267,8 @@ export function MenuPanel({
   onClose,
   character,
   onSelect,
+  cls,
+  onSelectClass,
   best,
   muted,
   onToggleMute,
@@ -272,6 +277,8 @@ export function MenuPanel({
   onClose: () => void;
   character: CharacterKey;
   onSelect: (k: CharacterKey) => void;
+  cls: ClassKey;
+  onSelectClass: (k: ClassKey) => void;
   best: number;
   muted: boolean;
   onToggleMute: () => void;
@@ -842,6 +849,78 @@ export function MenuPanel({
           </div>
         );
 
+
+      case "classes":
+        return (
+          <div className="grid gap-3">
+            <p className="text-center text-[10px] font-bold uppercase tracking-[0.25em] text-white/55">
+              {CLASS_KEYS.length} classes · each one reshapes the run
+            </p>
+            <div className="grid max-h-[50vh] grid-cols-2 gap-3 overflow-y-auto pr-1 sm:grid-cols-4">
+              {CLASS_KEYS.map((k) => {
+                const def = CLASSES[k];
+                const active = cls === k;
+                return (
+                  <Slot
+                    key={k}
+                    highlight={active}
+                    title={def.name}
+                    art={
+                      <div className="grid w-full place-items-center gap-1">
+                        <div
+                          className="grid h-16 w-full place-items-center rounded-xl border-3 border-ink p-1.5"
+                          style={{
+                            background: `radial-gradient(circle at 50% 45%, color-mix(in oklab, ${def.color} 32%, transparent), rgba(0,0,0,0.35) 72%)`,
+                          }}
+                        >
+                          <span
+                            className="font-display text-lg font-black uppercase"
+                            style={{ color: def.color }}
+                          >
+                            {def.name.slice(0, 2)}
+                          </span>
+                        </div>
+                        <p className="text-[9px] font-bold uppercase tracking-wide text-white/65">
+                          {WEAPONS[def.weapon].name}
+                        </p>
+                        <div className="flex flex-wrap justify-center gap-1">
+                          {def.buffs.slice(0, 3).map((b) => (
+                            <span
+                              key={b.label}
+                              className="rounded-md bg-black/35 px-1 text-[8px] font-black uppercase tracking-wide"
+                              style={{
+                                color:
+                                  b.tone === "bad"
+                                    ? "#ff8f8f"
+                                    : b.tone === "neutral"
+                                      ? "#cfd6ff"
+                                      : "#8ef2b0",
+                              }}
+                            >
+                              {b.label} {b.value}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    }
+                    price={
+                      <Price>
+                        {Math.round(def.hp * def.hpMult)} HP · x{(def.damage * def.damageMult).toFixed(2)}
+                      </Price>
+                    }
+                    action={
+                      active ? (
+                        <QuietButton disabled>Selected</QuietButton>
+                      ) : (
+                        <BuyButton onClick={() => onSelectClass(k)}>Select</BuyButton>
+                      )
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
+        );
 
       case "weapons": {
         const list = Object.values(WEAPONS);

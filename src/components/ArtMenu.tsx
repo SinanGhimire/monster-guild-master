@@ -44,7 +44,7 @@ function useOfferTimer() {
 
 export type ArtTarget =
   | { kind: "play" }
-  | { kind: "tab"; tab: "character" | "weapons" | "upgrades" | "echoes" }
+  | { kind: "tab"; tab: "character" | "classes" | "weapons" | "upgrades" | "echoes" }
   | { kind: "modal"; modal: string };
 
 type Tint = "gold" | "violet" | "teal" | "crimson" | "leaf";
@@ -70,6 +70,7 @@ const RIGHT_RAIL: RailItem[] = [
 ];
 
 const TABS: { id: string; label: string; icon: typeof User; target: ArtTarget; tint: Tint }[] = [
+  { id: "classes", label: "Classes", icon: User, target: { kind: "tab", tab: "classes" }, tint: "violet" },
   { id: "weapons", label: "Weapons", icon: Swords, target: { kind: "tab", tab: "weapons" }, tint: "crimson" },
 ];
 

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Pause, Volume2, VolumeX } from "lucide-react";
 import { MenuPanel, type PanelKey } from "@/components/MenuPanel";
 import { ArtMenu, type ArtTarget } from "@/components/ArtMenu";
+import type { ClassKey } from "@/game/classes";
 import { useEffect, useRef, useState } from "react";
 import { loadSprites, type Sprites } from "@/game/assets";
 import homeArtAsset from "@/assets/echo-home-art.png.asset.json";
@@ -169,6 +170,7 @@ function Game() {
   const [mode, setMode] = useState<RunMode>("survival");
   const [panel, setPanel] = useState<PanelKey | null>("gift");
   const [character, setCharacter] = useState<CharacterKey>("spike");
+  const [cls, setCls] = useState<ClassKey>("soldier");
   const [best, setBest] = useState(0);
   const [muted, setMutedState] = useState(false);
   const [touch, setTouch] = useState(false);
@@ -215,7 +217,7 @@ function Game() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    stateRef.current = createState(character, mode);
+    stateRef.current = createState(character, mode, cls);
     const input = inputRef.current;
     input.firing = false;
     input.keys.clear();
@@ -355,7 +357,7 @@ function Game() {
       window.removeEventListener("keyup", onKeyUp);
       window.removeEventListener("blur", onBlur);
     };
-  }, [ready, restartKey, screen, character, touch, mode]);
+  }, [ready, restartKey, screen, character, touch, mode, cls]);
 
   const weapon = WEAPONS[hud.weapon];
 
@@ -447,6 +449,11 @@ function Game() {
             onSelect={(k) => {
               playSfx("ui");
               setCharacter(k);
+            }}
+            cls={cls}
+            onSelectClass={(k) => {
+              playSfx("ui");
+              setCls(k);
             }}
             best={best}
             muted={muted}
