@@ -29,7 +29,7 @@ export type CritterEnemyKey =
   // ---- undead
   | "e_skel_white" | "e_skel_gold"
   // ---- imps
-  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson" | "e_gnat" | "e_root_imp"
+  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson" | "e_gnat"
   // ---- vermin
   | "e_bat"
   // ---- slimes
@@ -104,7 +104,6 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   { key: "e_bat", name: "Night Bat", body: "#6b5aa8", shade: "#2f2650", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.7, legs: "none", pattern: "none", wings: true, glow: "rgba(107,90,168,0.32)" },
 
   // ---- bosses
-  { key: "e_root_imp", name: "Root Imp", body: "#7a9c4a", shade: "#33501c", eye: "#ffe9a8", shape: "orb", crown: "horns", mouth: "fangs", eyes: 2, arms: true, tail: false, size: 0.9, legs: "two", pattern: "spots", brow: "angry" },
   { key: "e_sticklooter", name: "Sticklooter", body: "#7fd6a8", shade: "#2f6b4c", eye: "#0f2a1c", shape: "jelly", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "spots" },
   { key: "e_slime_skull", name: "Skull Ooze", body: "#9fb6d8", shade: "#3c4a68", eye: "#ff7a4a", shape: "jelly", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.9, legs: "none", pattern: "none", brow: "angry", glow: "rgba(159,182,216,0.32)" },
   { key: "e_demon_slime", name: "Demon Slime", body: "#c33f5c", shade: "#5c1424", eye: "#ffd24a", shape: "blob", crown: "horns", mouth: "maw", eyes: 2, arms: true, tail: false, size: 1.8, legs: "two", pattern: "none", brow: "angry", glow: "rgba(195,63,92,0.45)" },

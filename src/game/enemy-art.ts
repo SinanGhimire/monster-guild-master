@@ -35,9 +35,6 @@ import gnatDeath from "@/assets/foes/gnat-death.png";
 import batIdle from "@/assets/foes/bat-idle.png";
 import batWalk from "@/assets/foes/bat-walk.png";
 import batDeath from "@/assets/foes/bat-death.png";
-import rootImpIdle from "@/assets/foes/root_imp-idle.png";
-import rootImpWalk from "@/assets/foes/root_imp-walk.png";
-import rootImpDeath from "@/assets/foes/root_imp-death.png";
 import sticklooterIdle from "@/assets/foes/sticklooter-idle.png";
 import sticklooterWalk from "@/assets/foes/sticklooter-walk.png";
 import sticklooterDeath from "@/assets/foes/sticklooter-death.png";
@@ -64,7 +61,6 @@ export const ENEMY_ART: Partial<Record<CritterEnemyKey, ArtStrips>> = {
   e_mushroom: [mushroomIdle, mushroomWalk, mushroomDeath],
   e_bat: [batIdle, batWalk, batDeath],
   e_nightborne: [nightborneIdle, nightborneWalk, nightborneDeath],
-  e_root_imp: [rootImpIdle, rootImpWalk, rootImpDeath],
   e_sticklooter: [sticklooterIdle, sticklooterWalk, sticklooterDeath],
   e_slime_skull: [slimeSkullIdle, slimeSkullWalk, slimeSkullDeath],
   e_demon_slime: [demonSlimeIdle, demonSlimeWalk, demonSlimeDeath],

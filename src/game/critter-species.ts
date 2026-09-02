@@ -48,7 +48,6 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   e_bat: { tier: 1, radius: 18, speed: [140, 184], hp: 7, score: 18, height: 92, damage: 8, minWave: 2, weight: 2.6 },
 
   // ---- bosses
-  e_root_imp: { tier: 2, radius: 26, speed: [104, 138], hp: 14, score: 32, height: 126, damage: 12, minWave: 2, weight: 2.8 },
   e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 9, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.0 },
   e_slime_skull: { tier: 3, radius: 25, speed: [118, 150], hp: 16, score: 50, height: 112, damage: 14, minWave: 4, weight: 1.8 },
   e_demon_slime: { tier: 5, radius: 46, speed: [70, 92], hp: 175, score: 600, height: 226, damage: 32, minWave: 999, weight: 0 },

@@ -29,7 +29,6 @@ export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
   e_demon_slime: "rhino",
 
   // slimes & roots
-  e_root_imp: "chase",
   e_sticklooter: "swarm",
   e_slime_skull: "leap",
 
